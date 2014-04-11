@@ -1,0 +1,22 @@
+<div class="row">
+  <h4>Chart</h4>
+  <p>
+    Put chart here
+  </p>
+
+  <h4>Table</h4>
+  <p>
+    Weight table - last 10 days trend
+    <table>
+      <tr ng-repeat="weight in weights">
+        <td>{{weight.date | date:'yyyy-MM-dd Z'}}</td>
+        <td>||{{weight.weight}}</td>
+      </tr>
+    </table>
+  </p>
+
+  <h4>Add Weights</h4>
+  <div ng-controller="ModalCtrl">
+    <button class="btn btn-default" ng-click="open()">Add</button>
+  </div>
+</div>

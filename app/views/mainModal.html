@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h3>Add your weight</h3>
+</div>
+<div class="modal-body">
+  <label for="modal-datepicker">Date:</label>
+  <div ng-controller="DatepickerCtrl">
+    <div class="row">
+      <div class="col-md-5">
+        <p class="input-group">
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" max="maxDate" is-open="opened" show-weeks="showWeeks" close-text="Close" datepicker-options="dateOptions" ng-required="true" name="modal-datepicker" id="modal-datepicker"/>
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <label for="modal-weightinput">Weight:</label>
+  <div class="row">
+    <div class="col-md-5">
+      <input type="text" class="form-control" name="modal-weightinput" id="modal-weightinput"/>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-click="ok()">Submit</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
