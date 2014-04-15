@@ -6,11 +6,21 @@
 
   <h4>Table</h4>
   <p>
-    Weight table - last 10 days trend
-    <table>
+    <span>Weight table - last 10 days trend</span>
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Weight</th>
+          <th></th>
+        </tr>
+      </thead>
       <tr ng-repeat="weight in weights">
-        <td>{{weight.date | date:'yyyy-MM-dd Z'}}</td>
-        <td>||{{weight.weight}}</td>
+        <td>{{$index+1}}</td>
+        <td>{{weight.date | date:'yyyy-MM-dd'}}</td>
+        <td>{{weight.weight}}</td>
+        <td><span class="glyphicon glyphicon-remove clickable" ng-click="deleteEntry(weight._id)" ng-confirm-click="Deleting entry. Are you sure?"></span></td>
       </tr>
     </table>
   </p>

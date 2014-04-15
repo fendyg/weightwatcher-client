@@ -1,12 +1,12 @@
-<div class="modal-header">
-  <h3>Add your weight</h3>
-</div>
-<form name="modalForm" ng-submit="submit(modalForm.$valid)" novalidate>
-  <div class="modal-body">
-      <div>
+<div id="weightModal">
+  <div class="modal-header">
+    <h4>Add your weight</h4>
+  </div>
+  <form name="modalForm" ng-submit="submit(modalForm.$valid)" novalidate>
+    <div class="modal-body">
         <label for="modalDatePicker">Date:</label>
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-12">
             <p class="input-group">
               <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="modal.date" max="maxDate" is-open="$parent.opened" show-weeks="showWeeks" close-text="Close" datepicker-options="dateOptions" ng-required="true" name="modalDatePicker" id="modalDatePicker"/>
               <span class="input-group-btn">
@@ -17,15 +17,15 @@
         </div>
         <label for="modalWeightInput">Weight:</label>
         <div class="row">
-          <div class="col-md-5">
-            <input type="text" required class="form-control" ng-model="modal.weight" name="modalWeightInput" id="modal-weightinput"/>
-            <span ng-show="modalForm.modalWeightInput.$invalid">Weight is required</span>
+          <div class="col-md-12">
+            <input type="text" required class="form-control" ng-model="modal.weight" name="modalWeightInput" id="modalWeightInput"/>
+            <span ng-show="modalForm.modalWeightInput.$invalid" class="text-muted">Weight is required</span>
           </div>
         </div>
-      </div>
-  </div>
-  <div class="modal-footer">
-      <button type="submit" class="btn btn-success">Submit</button>
-      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-  </div>
-</form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

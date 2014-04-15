@@ -38,6 +38,14 @@ angular
   .factory('WeightGet', ['$resource', function($resource){
     return $resource(apiUrl + 'getweights', {});
   }])
+  .factory('WeightDelete', ['$http', function($http){
+    return {
+      'delete': function(id, callback) {
+        var url = apiUrl + 'deleteweight/' + id;
+        $http.delete(url).success(callback);
+      }
+    };
+  }])
   .factory('WeightPost', ['$http', function($http){
     return {
       'post': function(data, callback) {

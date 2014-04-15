@@ -26,12 +26,14 @@ angular.module('weightwatcherClientApp')
     });
 
     $scope.submit = function(isValid) {
-      var data = $scope.currentInfo;
+      if(isValid){
+        var data = $scope.currentInfo;
 
-      WeightPost.post(data,function(){
-        console.log(data);
-        $modalInstance.close();
-      });
+        WeightPost.post(data,function(){
+          console.log(data);
+          $modalInstance.close();
+        });
+      }
     };
 
     $scope.cancel = function () {
