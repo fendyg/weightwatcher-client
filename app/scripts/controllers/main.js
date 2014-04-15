@@ -15,7 +15,6 @@ angular.module('weightwatcherClientApp')
 
     $scope.deleteEntry = function(id){
       WeightDelete.delete(id, function(){
-        console.log(id + 'deleted!');
         $scope.refreshWeight();
       });
     };

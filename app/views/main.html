@@ -16,7 +16,7 @@
           <th></th>
         </tr>
       </thead>
-      <tr ng-repeat="weight in weights">
+      <tr ng-repeat="weight in weights | orderBy:'date'">
         <td>{{$index+1}}</td>
         <td>{{weight.date | date:'yyyy-MM-dd'}}</td>
         <td>{{weight.weight}}</td>

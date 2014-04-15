@@ -30,7 +30,6 @@ angular.module('weightwatcherClientApp')
         var data = $scope.currentInfo;
 
         WeightPost.post(data,function(){
-          console.log(data);
           $modalInstance.close();
         });
       }
