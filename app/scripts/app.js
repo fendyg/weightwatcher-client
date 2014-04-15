@@ -18,7 +18,6 @@ angular
     ];
 
     $rootScope.$route = $route;
-    $rootScope.currentInfo = {};
   })
   .config(function ($routeProvider) {
     $routeProvider

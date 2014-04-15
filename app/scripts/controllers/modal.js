@@ -9,34 +9,29 @@ angular.module('weightwatcherClientApp')
       });
     };
   }])
-  .controller('ModalFormCtrl', ['$rootScope', '$scope', 'WeightPost', '$modalInstance', function($rootScope, $scope, WeightPost, $modalInstance){
+  .controller('ModalFormCtrl', ['$scope', 'WeightPost', '$modalInstance', function($scope, WeightPost, $modalInstance){
+    $scope.modal = {};
+
     $scope.today = function() {
-      $scope.date = new Date();
+      $scope.modal.date = new Date();
     };
     $scope.today();
 
-    $scope.currentInfo = {
-      'date': '2010-01-01',
-      'weight': 123
-    };
-
-    //Mirror date and weight ng-model to rootScope
-    $scope.$watchCollection('[date, weight]', function(){
-      $rootScope.currentInfo = {
-        'date': $scope.date,
-        'weight': $scope.weight
+    //Mirror date and weight ng-model to scope
+    $scope.$watchCollection('[modal.date, modal.weight]', function(){
+      $scope.currentInfo = {
+        'date': $scope.modal.date,
+        'weight': $scope.modal.weight
       };
     });
 
     $scope.submit = function(isValid) {
-      if(isValid) {
-        var data = $scope.currentInfo;
+      var data = $scope.currentInfo;
 
-        WeightPost.post(data,function(){
-          console.log(data);
-          $modalInstance.close();
-        });
-      }
+      WeightPost.post(data,function(){
+        console.log(data);
+        $modalInstance.close();
+      });
     };
 
     $scope.cancel = function () {
@@ -49,7 +44,7 @@ angular.module('weightwatcherClientApp')
     };
 
     $scope.clear = function () {
-      $scope.date = null;
+      $scope.modal.date = null;
     };
 
     $scope.maxDate = new Date();
