@@ -1,5 +1,7 @@
 'use strict';
 
+var apiUrl = 'http://localhost:3000/';
+
 angular
   .module('weightwatcherClientApp', [
     'ngResource',
@@ -7,7 +9,6 @@ angular
     'ui.bootstrap'
   ])
   .run(function($rootScope, $route){
-    
     $rootScope.libraries = [
       'AngularJS,',
       'Grunt,',
@@ -17,6 +18,7 @@ angular
     ];
 
     $rootScope.$route = $route;
+    $rootScope.currentInfo = {};
   })
   .config(function ($routeProvider) {
     $routeProvider
@@ -34,8 +36,16 @@ angular
         redirectTo: '/'
       });
   })
-  .factory('Weight', ['$resource', function($resource){
-    return $resource('http://localhost:3000/getweights', {});
+  .factory('WeightGet', ['$resource', function($resource){
+    return $resource(apiUrl + 'getweights', {});
+  }])
+  .factory('WeightPost', ['$http', function($http){
+    return {
+      'post': function(data, callback) {
+        var url = apiUrl + 'postweight';
+        $http.post(url, data).success(callback);
+      }
+    };
   }])
   // Ignore socket.io implementation check by jshint (io not defined error on subsequent run)
   /* jshint ignore:start */
