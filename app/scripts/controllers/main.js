@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('weightwatcherClientApp')
-  .controller('MainCtrl', ['$scope', 'WeightGet', 'WeightDelete', 'Socket', function ($scope, WeightGet, WeightDelete, Socket) {
+  .controller('MainCtrl', function ($rootScope, $scope, WeightGet, WeightDelete, Socket) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -9,7 +9,8 @@ angular.module('weightwatcherClientApp')
     ];
 
     $scope.refreshWeight = function(){
-      $scope.weights = WeightGet.query();
+      $rootScope.weights = WeightGet.query();
+      $scope.weights = $rootScope.weights;
     };
     $scope.refreshWeight();
 
@@ -22,7 +23,7 @@ angular.module('weightwatcherClientApp')
     Socket.on('reload', function() {
       $scope.refreshWeight();
     });
-  }])
+  })
   .directive('ngConfirmClick', [
     function(){
       return {

@@ -1,15 +1,15 @@
 'use strict';
 /*jshint unused: false */
 angular.module('weightwatcherClientApp')
-  .controller('ModalCtrl', ['$scope', '$modal', function ($scope, $modal) {
+  .controller('ModalCtrl', function ($scope, $modal) {
     $scope.open = function () {
       var modalInstance = $modal.open({
         templateUrl: 'views/mainModal.html',
         controller: 'ModalFormCtrl'
       });
     };
-  }])
-  .controller('ModalFormCtrl', ['$scope', 'WeightPost', '$modalInstance', function($scope, WeightPost, $modalInstance){
+  })
+  .controller('ModalFormCtrl', function($scope, WeightPost, $modalInstance){
     $scope.modal = {};
 
     $scope.today = function() {
@@ -69,4 +69,4 @@ angular.module('weightwatcherClientApp')
     };
 
     $scope.format = 'yyyy/MM/dd';
-  }]);
+  });

@@ -18,6 +18,7 @@ angular
     ];
 
     $rootScope.$route = $route;
+    $rootScope.weights = {};
   })
   .config(function ($routeProvider) {
     $routeProvider
@@ -35,25 +36,27 @@ angular
         redirectTo: '/'
       });
   })
-  .factory('WeightGet', ['$resource', function($resource){
-    return $resource(apiUrl + 'getweights', {});
-  }])
-  .factory('WeightDelete', ['$http', function($http){
+  .factory('WeightGet', function($resource){
+    var rs = $resource(apiUrl + 'getweights', {});
+
+    return rs;
+  })
+  .factory('WeightDelete', function($http){
     return {
       'delete': function(id, callback) {
         var url = apiUrl + 'deleteweight/' + id;
         $http.delete(url).success(callback);
       }
     };
-  }])
-  .factory('WeightPost', ['$http', function($http){
+  })
+  .factory('WeightPost', function($http){
     return {
       'post': function(data, callback) {
         var url = apiUrl + 'postweight';
         $http.post(url, data).success(callback);
       }
     };
-  }])
+  })
   // Ignore socket.io implementation check by jshint (io not defined error on subsequent run)
   /* jshint ignore:start */
   .factory('Socket', function($rootScope){
