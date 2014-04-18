@@ -32,15 +32,15 @@
     </header>
 
     <div class="container" ng-view=""></div>
-    
+
     <footer>
       <span class="library-title">
-        Made possible by: 
+        Made possible by:
       </span>
         <ul>
           <li ng-repeat="library in libraries" class="library">{{library}}</li>
         </ul>
-      
+
     </footer>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -66,14 +66,16 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/socket.io.min.js"></script>
+    <script src="bower_components/d3.v3.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="bower_components/socket.io.min.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/modal.js"></script>
+        <script src="scripts/controllers/weightchart.js"></script>
         <!-- endbuild -->
 </body>
 </html>

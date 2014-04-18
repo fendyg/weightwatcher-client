@@ -41,6 +41,34 @@ footer {
     }
 }
 
+//Weight table animate
+$weight-table-class: '.weight-table';
+
+@mixin transitions($duration){
+    -webkit-transition: $duration linear all;
+    -moz-transition: $duration linear all;
+    -o-transition: $duration linear all;
+    transitions: $duration linear all;
+}
+
+#{$weight-table-class}.ng-enter,
+#{$weight-table-class}.ng-leave,
+#{$weight-table-class}.ng-move {
+    @include transitions(0.5s);
+}
+
+#{$weight-table-class}.ng-enter,
+#{$weight-table-class}.ng-move {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+#{$weight-table-class}.ng-leave {
+    opacity: 1;
+    overflow: hidden;
+}
+
 // Modal style
 .modal-dialog {
     width: 300px;
