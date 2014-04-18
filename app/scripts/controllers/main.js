@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('weightwatcherClientApp')
-  .controller('MainCtrl', function ($rootScope, $scope, WeightGet, WeightDelete, Socket) {
+  .controller('MainCtrl', function ($rootScope, $scope, WeightGet, WeightDelete, Socket, D3Draw) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -10,7 +10,11 @@ angular.module('weightwatcherClientApp')
 
     $scope.refreshWeight = function(){
       $rootScope.weights = WeightGet.query();
-      $scope.weights = $rootScope.weights;
+      $rootScope.weights.$promise.then(function(result){
+        $rootScope.weights = result;
+        $scope.weights = $rootScope.weights;
+        D3Draw.render();
+      });
     };
     $scope.refreshWeight();
 
