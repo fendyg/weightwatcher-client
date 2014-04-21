@@ -13,6 +13,7 @@ angular
       'Bower,',
       'socket.io,',
       'Yeoman',
+      'D3.js'
     ];
 
     $rootScope.apiUrl = 'http://localhost:3000/';

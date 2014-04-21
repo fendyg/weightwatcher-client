@@ -2,11 +2,8 @@
 
 angular.module('weightwatcherClientApp')
   .controller('MainCtrl', function ($rootScope, $scope, WeightGet, WeightDelete, Socket, D3Draw) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    //Default value for showAll, latest 10 items
+    $scope.showAll = -10;
 
     $scope.refreshWeight = function(){
       $rootScope.weights = WeightGet.query();
