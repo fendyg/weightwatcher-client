@@ -12,7 +12,8 @@ angular
       'Grunt,',
       'Bower,',
       'socket.io,',
-      'Yeoman',
+      'Yeoman, ',
+      'underscore.js, ',
       'D3.js'
     ];
 

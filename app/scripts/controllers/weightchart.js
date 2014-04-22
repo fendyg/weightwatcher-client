@@ -73,9 +73,9 @@ angular.module('weightwatcherClientApp')
           attr('transform', 'translate('+chartConfig.padding+', '+chartConfig.padding+')').
           call(yAxis);
 
-        //Show guideline on mouseover
+        //Append guideline on chart
         var guideLine = d3.select('#weightChart').append('div').
-              attr('class', '').
+              attr('class', 'guideLine').
               style('position', 'absolute').
               style('z-index', '19').
               style('width', '1px').
@@ -84,26 +84,51 @@ angular.module('weightwatcherClientApp')
               style('margin-left', chartConfig.padding+'px').
               style('background', '#333');
 
-        var dateArray = _.map($rootScope.weights, function(weight){
+        //Legend showing hovered date and weight
+        var chartLegend = d3.select('#weightChart').append('div').
+              attr('class', 'chartLegend').
+              style('position', 'absolute').
+              style('z-index', '20').
+              style('top', '30px').
+              style('left', '40px').
+              style('visibility', 'hidden');
+
+        chartLegend.append('svg:text').
+          attr('')
+
+        //Map weights json object to create 'hash' array
+        var dateArray = _.map(chartConfig.data, function(weight){
           var tempDate = new Date(weight.date);
-          var month_date = tempDate.getMonth() +''+ tempDate.getDate();
+          var month_date = tempDate.getMonth() +''+ tempDate.getDate() +''+ tempDate.getYear();
           return month_date;
         });
 
-        rootSVG.on('mousemove', function(){
-          var mousex = d3.mouse(this)[0] - chartConfig.padding;
-          var mousex_invert = chartConfig.x.invert(mousex);
-          var hover_date = new Date(mousex_invert);
-          hover_date = hover_date.getMonth() +''+ hover_date.getDate();
+        rootSVG.
+          on('mouseover', function() { chartLegend.style('visibility', 'visible'); }).
+          on('mouseout', function() { chartLegend.style('visibility', 'hidden'); }).
+          on('mousemove', onMouseMove);
 
-          var mapWeight = dateArray.indexOf(hover_date);
+        function onMouseMove() {
+          var mousex = d3.mouse(this)[0] - chartConfig.padding,
+              mousex_invert = chartConfig.x.invert(mousex),
+              hoverIndex = new Date(mousex_invert),
+              dateFormat = d3.time.format('%Y-%m-%d'),
+              hoverX,
+              hoverY;
+
+          hoverIndex = hoverIndex.getMonth() +''+ hoverIndex.getDate() +''+ hoverIndex.getYear();
+
+          var mapWeight = dateArray.indexOf(hoverIndex);
           if(mapWeight!== -1) {
-            console.log(hover_date + '-' + $rootScope.weights[mapWeight].weight);
+            hoverX = chartConfig.data[mapWeight].date;
+            hoverY = chartConfig.data[mapWeight].weight;
+            chartLegend.html('<p>'+dateFormat(new Date(hoverX))+'<br>'+hoverY+'</p>')
+            // console.log(hoverIndex + '-' + chartConfig.data[mapWeight].weight);
           }
 
           //Move guideline according to mouse position
           guideLine.style('left', mousex + 'px');
-        });
+        }
       }
     };
   })
