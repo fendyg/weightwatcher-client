@@ -43,10 +43,12 @@ footer {
 
 //Chart styling
 #weightChart {
+    position: relative;
+
     .axis path,
     .axis line {
         fill: none;
-        stroke: black;
+        stroke: #ddd;
         shape-rendering: crispEdges;
     }
 
@@ -54,10 +56,31 @@ footer {
         font-family: sans-serif;
         font-size: 11px;
     }
+
+    .guideline {
+        color: #999;
+        fill: none;
+        stroke-width: 1px;
+    }
 }
 
-//Weight table animate
-$weight-table-class: '.weight-table';
+//Weight Table Styles
+.weight-table {
+    width: 475px;
+
+    .weightColumn {
+        width: 100px;
+    }
+    .deleteColumn {
+        width: 50px;
+    }
+
+    .ng-hide {
+        display: block!important;
+        visibility: hidden;
+    }
+}
+
 
 @mixin transitions($duration){
     -webkit-transition: $duration linear all;
@@ -66,20 +89,20 @@ $weight-table-class: '.weight-table';
     transitions: $duration linear all;
 }
 
-#{$weight-table-class}.ng-enter,
-#{$weight-table-class}.ng-leave,
-#{$weight-table-class}.ng-move {
+.weight-table.ng-enter,
+.weight-table.ng-leave,
+.weight-table.ng-move {
     @include transitions(0.5s);
 }
 
-#{$weight-table-class}.ng-enter,
-#{$weight-table-class}.ng-move {
+.weight-table.ng-enter,
+.weight-table.ng-move {
     opacity: 0;
     height: 0;
     overflow: hidden;
 }
 
-#{$weight-table-class}.ng-leave {
+.weight-table.ng-leave {
     opacity: 1;
     overflow: hidden;
 }

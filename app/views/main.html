@@ -1,8 +1,8 @@
+<h4>Chart</h4>
+<div id="weightChart"></div>
 <div class="row">
-  <h4>Chart</h4>
-  <div id="weightChart"></div>
-  <h4>Table</h4>
-  <p>
+  <div id="weightTableContainer" class="col-sm-8">
+    <h4>Table</h4>
     <span>Weight table - last 10 days trend. To show {{!table.listAll && 'all' || 'latest 10 items' }}, click button</span>
     <button type="button" class="btn btn-primary btn-xs" ng-model="showAll" btn-checkbox btn-checkbox-true="weights.length" btn-checkbox-false="-10" ng-click="table.listAll = !table.listAll">Show {{!table.listAll && 'All' || '10' }}</button>
     <table class="weight-table table table-hover table-condensed">
@@ -10,21 +10,22 @@
         <tr>
           <th>#</th>
           <th>Date</th>
-          <th>Weight</th>
-          <th></th>
+          <th class="weightColumn">Weight</th>
+          <th class="deleteColumn"></th>
         </tr>
       </thead>
-      <tr ng-repeat="weight in weights | orderBy:'date' | limitTo:showAll">
+      <tr ng-repeat="weight in weights | orderBy:'date' | limitTo:showAll track by weight._id" ng-mouseenter="hoverDelete = true" ng-mouseleave="hoverDelete = false">
         <td>{{$index+1}}</td>
         <td>{{weight.date | date:'yyyy-MM-dd'}}</td>
         <td>{{weight.weight}}</td>
-        <td><span class="glyphicon glyphicon-remove clickable" ng-click="deleteEntry(weight._id)" ng-confirm-click="Deleting entry. Are you sure?"></span></td>
+        <td><span class="glyphicon glyphicon-remove clickable" ng-click="deleteEntry(weight._id)" ng-confirm-click="Deleting entry. Are you sure?" ng-show="hoverDelete"></span></td>
       </tr>
     </table>
-  </p>
-
-  <h4>Add Weights</h4>
-  <div ng-controller="ModalCtrl">
-    <button class="btn btn-default" ng-click="open()">Add</button>
+  </div>
+  <div id="weightAddContainer" class="col-sm-4">
+    <h4>Add Weights</h4>
+    <div ng-controller="ModalCtrl">
+      <button class="btn btn-primary btn-block" ng-click="open()">Add</button>
+    </div>
   </div>
 </div>
