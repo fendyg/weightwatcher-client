@@ -52,10 +52,14 @@ footer {
         shape-rendering: crispEdges;
     }
 
-    .axis text,
-    .chartLegend {
+    .axis text {
         font-family: sans-serif;
         font-size: 11px;
+    }
+
+    .chartLegend {
+        font-family: sans-serif;
+        font-size: 12px;
     }
 
     .guideline {
